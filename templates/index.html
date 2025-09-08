@@ -23,7 +23,7 @@
 
         <div class="image-container mt-4">
           <img 
-            src=" https://www.nanmagazine.com/wp-content/uploads/2019/10/pub-uni-estatal-amazonica-02.jpg" 
+            src="https://www.nanmagazine.com/wp-content/uploads/2019/10/pub-uni-estatal-amazonica-02.jpg" 
             alt="Campus Universidad Estatal Amazónica"
             class="responsive-image">
           <div class="image-caption">Sede principal de la Universidad Estatal Amazónica</div>
@@ -46,18 +46,10 @@
     </div><!-- /row -->
   </div><!-- /container-fluid -->
 </section>
-
-<div class="image-container">
-  <img 
-    src="https://i1.wp.com/ninaradiofm.com/wp-content/uploads/2020/06/uni-estatal-amazonica-01.jpg?fit=1200%2C675&ssl=1" 
-    alt="Campus Universidad Estatal Amazónica"
-    class="responsive-image">
-  <div class="image-caption"> Universidad Estatal Amazónica</div>
-</div>
 {% endblock %}
 
 {% block content %}
-<!-- Video centrado y de tamaño moderado -->
+<!-- Video y misión/visión -->
 <section class="py-4">
   <div class="container">
     <div class="row justify-content-center">
@@ -76,28 +68,79 @@
           </div>
         </div>
         <br>
-        <br>
-        <br>
-        <p>Misión.</p>
-        <p> Generar ciencia y tecnología y formar profesionales e investigadores que 
+        <p><strong>Misión.</strong></p>
+        <p>
+          Generar ciencia y tecnología y formar profesionales e investigadores que 
           respondan a las necesidades del territorio, guiados por el desarrollo sostenible 
           de la Amazonía y del Ecuador, preservando saberes ancestrales y su cultura. 
-
-
-         </p>
-         <p>Visión.</p>
-         <p> 
-         Ser una comunidad académica y científica que, desde la docencia y la investigación, 
-         impulse el desarrollo sostenible de la Amazonía y revalorice a la región como recurso 
-         estratégico del Estado, integrando saberes ancestrales y aportando a la economía, la cultura 
-         y la unidad nacional.</p>
-         <br>
-         <br>
-         <br>
+        </p>
+        <p><strong>Visión.</strong></p>
+        <p>
+          Ser una comunidad académica y científica que, desde la docencia y la investigación, 
+          impulse el desarrollo sostenible de la Amazonía y revalorice a la región como recurso 
+          estratégico del Estado, integrando saberes ancestrales y aportando a la economía, la cultura 
+          y la unidad nacional.
+        </p>
       </div>
     </div><!-- /row -->
   </div><!-- /container -->
 </section>
+
+<!-- Formulario de contacto -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-center">Contáctanos</h2>
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        <div class="card card-glass shadow-lg border-0 rounded-4">
+          <div class="card-body p-4 p-lg-5">
+            <form action="{{ url_for('enviar') }}" method="post" class="needs-validation" novalidate>
+              <!-- Nombre -->
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre completo</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" maxlength="80" required>
+                <div class="invalid-feedback">Ingresa tu nombre.</div>
+              </div>
+              <!-- Correo -->
+              <div class="mb-3">
+                <label for="correo" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="correo" name="correo" maxlength="120" required>
+                <div class="form-text">Ej.: nombre@dominio.com</div>
+                <div class="invalid-feedback">Ingresa un correo válido.</div>
+              </div>
+              <!-- Mensaje -->
+              <div class="mb-4">
+                <label for="mensaje" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="mensaje" name="mensaje" rows="4" maxlength="255" required></textarea>
+                <div class="invalid-feedback">Escribe un mensaje.</div>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary px-4">Enviar</button>
+                <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
 {% endblock %}
 
 

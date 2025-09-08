@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Formulario — Mi Proyecto Flask — UEA{% endblock %}
+
+{% block hero %}
+<section class="py-5 hero-surface">
+  <div class="container">
+    <h1 class="display-5 fw-bold mb-2">Formulario</h1>
+    <p class="lead text-secondary mb-0">
+      Ingresa tus datos. Se guardarán en TXT, JSON, CSV y SQLite.
+    </p>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
+    <div class="card card-glass shadow-lg border-0 rounded-4">
+      <div class="card-body p-4 p-lg-5">
+        <h5 class="card-title mb-3">Datos del usuario</h5>
+        <p class="text-secondary small mb-4">
+          Completa los 3 campos y presiona <b>Guardar</b>.
+        </p>
+
+        <form action="{{ url_for('enviar') }}" method="post" class="needs-validation" novalidate>
+          <!-- Nombre -->
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre completo</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="80" required>
+            <div class="invalid-feedback">Ingresa tu nombre.</div>
+          </div>
+
+          <!-- Correo -->
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo" name="correo" maxlength="120" required>
+            <div class="form-text">Ej.: nombre@dominio.com</div>
+            <div class="invalid-feedback">Ingresa un correo válido.</div>
+          </div>
+
+          <!-- Mensaje -->
+          <div class="mb-4">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea class="form-control" id="mensaje" name="mensaje" rows="4" maxlength="255" required></textarea>
+            <div class="invalid-feedback">Escribe un mensaje (máx. 255 caracteres).</div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button type="submit" class="btn btn-primary px-4">Guardar</button>
+            <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+            <a class="btn btn-light border" href="{{ url_for('index') }}">Volver al inicio</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Accesos rápidos a las evidencias -->
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <a class="btn btn-outline-dark btn-sm" href="{{ url_for('ver_txt') }}">Ver TXT</a>
+      <a class="btn btn-outline-dark btn-sm" href="{{ url_for('ver_json') }}">Ver JSON</a>
+      <a class="btn btn-outline-dark btn-sm" href="{{ url_for('ver_csv') }}">Ver CSV</a>
+      <a class="btn btn-outline-dark btn-sm" href="{{ url_for('ver_usuarios') }}">Ver SQLite</a>
+    </div>
+  </div>
+</div>
+
+<!-- Validación Bootstrap (cliente) -->
+<script>
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
+{% endblock %}
+z|

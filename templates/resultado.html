@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Resultado — Mi Proyecto Flask — UEA{% endblock %}
+
+{% block hero %}
+<section class="py-5 hero-surface">
+  <div class="container">
+    <h1 class="display-5 fw-bold mb-2">Resultado</h1>
+    <p class="lead text-secondary mb-0">Estado de la operación y datos.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-10">
+    <div class="alert {{ 'alert-success' if ok else 'alert-danger' if ok is not none else 'alert-info' }} shadow-sm" role="alert">
+      {{ mensaje }}
+    </div>
+
+    {# Preferimos mostrar el JSON ya "bonito" si el backend lo envió #}
+    {% if extra_pretty %}
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body">
+          <pre class="mb-0" style="white-space: pre-wrap">{{ extra_pretty }}</pre>
+        </div>
+      </div>
+
+    {# Si no hay extra_pretty, usamos extra con tojson (sin ensure_ascii) #}
+    {% elif extra is defined and extra is not none %}
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body">
+          <pre class="mb-0" style="white-space: pre-wrap">{{ extra | tojson(indent=2) }}</pre>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <a class="btn btn-primary" href="{{ url_for('formulario') }}">Volver al formulario</a>
+      <a class="btn btn-outline-secondary" href="{{ url_for('index') }}">Inicio</a>
+      <a class="btn btn-outline-dark" href="{{ url_for('ver_txt') }}">Ver TXT</a>
+      <a class="btn btn-outline-dark" href="{{ url_for('ver_json') }}">Ver JSON</a>
+      <a class="btn btn-outline-dark" href="{{ url_for('ver_csv') }}">Ver CSV</a>
+      <a class="btn btn-outline-dark" href="{{ url_for('ver_usuarios') }}">Ver SQLite</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

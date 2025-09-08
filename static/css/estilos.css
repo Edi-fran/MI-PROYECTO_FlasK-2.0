@@ -106,3 +106,10 @@ html, body {
         padding: 10px;
     }
 }
+
+
+.card-glass{backdrop-filter:saturate(120%) blur(6px); background:rgba(255,255,255,.75); border-radius:1rem}
+.hero-surface{background:linear-gradient(180deg,#f8fafc,transparent)}
+.text-gradient{background:linear-gradient(90deg,#0d6efd,#20c997);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo-uea{max-height:54px; height:auto}
+.brand-dot{width:10px;height:10px;border-radius:50%;display:inline-block;background:#20c997}
